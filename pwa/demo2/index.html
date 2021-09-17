@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo2</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <p>hello</p>
+    <script>
+        window.addEventListener('load', async () => {
+            if ('serviceWorker' in navigator) {
+                try {
+                    const registration = await navigator.serviceWorker.register('./sw.js')
+                    console.log("成功", registration);
+                } catch (error) {
+                    console.log("失败", error);
+                }
+            }
+
+            // 如果页面一进来，发现用户没有联网，给用户一个通知
+            if(Notification.permission==='default'){
+                Notification.requestPermission()
+            }
+            if(!navigator.onLine){
+                new Notification('提示',{body:'当前没有网络，访问缓存资源'})
+            }
+
+            // 提示用户重新连上网络
+            window.addEventListener('online',()=>{
+                new Notification('提示',{body:'网络已连接，请刷新访问最新数据'})
+            })
+        })
+    </script>
+</body>
+
+</html>

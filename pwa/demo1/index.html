@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo1</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <p>hello</p>
+    <script>
+        // web worker
+        // console.log('start');
+        // const worker = new Worker('work.js')
+        // worker.addEventListener('message',e=>{
+        //     console.log(e.data);
+        // })
+        // console.log('end');
+
+        // service worker
+        // window.addEventListener('load', () => {
+        //     if ('serviceWorker' in navigator) {
+        //         navigator.serviceWorker.register('./sw.js').then(registration => {
+        //             console.log(registration);
+        //         }).catch(err => {
+        //             console.log(err);
+        //         })
+        //     }
+        // })
+
+        // window对象上fetch属性
+        fetch('./data.json').then(res=>{
+            //res是请求得到的响应内容，二进制的流
+            //调用res.json()方法，可以把数据变成json格式，读取的是一个json数据
+            // console.log(res.json());
+            // 返回的也是一个promise
+            return res.json()
+        }) //promise链式写法：返回promise可以在外面继续写.then
+        .then(data=>{
+            console.log(data,"44");
+        })
+    </script>
+</body>
+
+</html>
